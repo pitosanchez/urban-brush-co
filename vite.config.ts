@@ -15,5 +15,18 @@ export default defineConfig({
     outDir: "dist",
     assetsDir: "assets",
     sourcemap: true,
+    rollupOptions: {
+      output: {
+        manualChunks: {
+          // Split vendor libraries into separate chunks
+          vendor: ['react', 'react-dom'],
+          animations: ['gsap', 'framer-motion'],
+          ui: ['lucide-react', 'react-day-picker'],
+          radix: ['@radix-ui/react-dialog', '@radix-ui/react-select', '@radix-ui/react-switch', '@radix-ui/react-tabs']
+        }
+      }
+    },
+    // Increase chunk size warning limit to 750kb since we have rich UI
+    chunkSizeWarningLimit: 750,
   },
 });
